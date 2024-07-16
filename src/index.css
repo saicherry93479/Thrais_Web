@@ -1,0 +1,39 @@
+body {
+  background-color: white;
+  /* font-family: "Ubuntu", sans-serif; */
+  /* font-family: "Playwrite NG Modern", cursive;
+   */
+  /* font-family: "Josefin Sans", sans-serif; */
+  font-family: "Varela Round", sans-serif;
+
+}
+*{
+  scroll-behavior: smooth;
+}
+.heroGradient {
+  background: #f3dfc6;
+  background: linear-gradient(180deg, #f3dfc6 0%, rgba(255, 255, 255, 1) 100%);
+}
+
+.whyGradient {
+  background: #00a3ea;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 163, 234, 1) 0% rgba(255, 255, 255, 1) 100%
+  );
+}
+
+.headerButton {
+  border-radius: 9999px;
+  padding: 0.5rem 1rem;
+  --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1),
+    0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color),
+    0 4px 6px -4px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
+    var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+.no-scroll {
+  overflow: hidden;
+}
