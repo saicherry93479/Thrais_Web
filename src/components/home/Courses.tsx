@@ -19,7 +19,7 @@ const COURSES_DATA = [
   },
   {
     image: TESTING_IMAGE,
-    name: "Automation and Scheduling",
+    name: "Automation Testing with Selenium and C#",
   },
   {
     image: PROGRAMMING_image,
@@ -66,7 +66,9 @@ const Courses = () => {
               src={d.image}
             ></img>
             <div className="absolute flex md:hidden md:group-hover:flex w-full rounded-2xl top-0 left-0 h-full bg-black/80  justify-center items-center">
-              <p className="text-white font-bold text-[22px]">{d.name}</p>
+              <p className="text-white font-bold text-[22px]">
+                {index !== 3 ? d.name : "Automation and Scheduling"}
+              </p>
             </div>
           </a>
         ))}

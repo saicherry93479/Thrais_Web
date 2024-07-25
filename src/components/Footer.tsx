@@ -1,8 +1,10 @@
 const Footer = () => {
   return (
     <footer className="p-6 text-center bg-[#00A3EA] text-white">
-      <strong>© 2024 Thrias</strong>
-      <p>Developed by Speranza</p>
+      <p className="font-bold">© 2024 Thrias</p>
+      <a target="_blank" className="underline" href="https://elevatebox.in/">
+        Developed by ElevateBox
+      </a>
     </footer>
   );
 };
