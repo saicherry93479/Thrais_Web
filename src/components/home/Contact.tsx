@@ -73,19 +73,7 @@ const Contact = () => {
                 } catch (e) {
                   setSuccess(0);
                 }
-                // const res = await actions.Contact({
-                //   phoneNumber: phone,
-                //   email: email,
-                // });
 
-                // if (res.success) {
-                //   setSuccess(1);
-                //   setEmail("");
-                //   setPhone("");
-                //   window.open("", "_blank");
-                // } else {
-                //   setSuccess(0);
-                // }
                 setProcessing(false);
               } else {
                 setSuccess(0);

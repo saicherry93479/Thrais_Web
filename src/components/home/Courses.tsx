@@ -7,11 +7,11 @@ import { useEffect, useState } from "react";
 const COURSES_DATA = [
   {
     image: DEVOPS_IMAGE,
-    name: "Devops",
+    name: "DevOps",
   },
   {
     image: DSA_IMAGE,
-    name: "DSA",
+    name: "Data Structures",
   },
   {
     image: MERN_IMAGE,
@@ -19,7 +19,7 @@ const COURSES_DATA = [
   },
   {
     image: TESTING_IMAGE,
-    name: "Automated Testing",
+    name: "Automation and Scheduling",
   },
   {
     image: PROGRAMMING_image,
@@ -43,16 +43,21 @@ const Courses = () => {
       </h2>
       <div className="grid mx-auto gap-4 md:gap-y-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3">
         {COURSES_DATA.map((d, index) => (
-          <div
+          <a
+            href={
+              index !== 4
+                ? `coursepage?course=${d.name}`
+                : "/programminglanguages"
+            }
             className="p-2 rounded-xl group relative flex flex-col gap-2 cursor-pointer "
             style={{
               boxShadow:
                 "rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px",
               flexShrink: 0,
             }}
-            onClick={()=>{
-              if(index===4){
-                window.location.href = "/programminglanguages"
+            onClick={() => {
+              if (index === 4) {
+                window.location.href = "/programminglanguages";
               }
             }}
           >
@@ -63,13 +68,16 @@ const Courses = () => {
             <div className="absolute flex md:hidden md:group-hover:flex w-full rounded-2xl top-0 left-0 h-full bg-black/80  justify-center items-center">
               <p className="text-white font-bold text-[22px]">{d.name}</p>
             </div>
-          </div>
+          </a>
         ))}
       </div>
       {home && (
-        <div className="mt-8 md:mt-16 w-full mx-auto mt-12  md:w-fit bg-[#00A3EA] rounded-2xl text-[14px] md:text-[16px]  px-12 py-3 flex items-center gap-4 text-white">
+        <a
+          href="/services"
+          className="mt-8 md:mt-16 w-full mx-auto mt-12  md:w-fit bg-[#00A3EA] rounded-2xl text-[14px] md:text-[16px]  px-12 py-3 flex items-center gap-4 text-white"
+        >
           <p className="text-center w-full">Know More About Courses</p>
-        </div>
+        </a>
       )}
     </div>
   );

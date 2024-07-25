@@ -1,24 +1,78 @@
-import { useState } from "react";
+import { addDoc, collection } from "firebase/firestore";
+import { useEffect, useState } from "react";
+import { db } from "../../db";
 
 const Form = () => {
-  const [userType, setUserType] = useState("College");
+  const [userType, setUserType] = useState("Student");
   const [fullName, setFullName] = useState("");
   const [collegeName, setCollegeName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [email, setEmail] = useState("");
   const [termsAccepted, setTermsAccepted] = useState(false);
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false); // For spinner
+  const [success, setSuccess] = useState(""); // For success message
 
-  const handleSubmit = (e: { preventDefault: () => void }) => {
+  useEffect(() => {
+    if (success.length > 0) {
+      setTimeout(() => {
+        setSuccess("");
+      }, 3000);
+    }
+  }, [success]);
+
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
-    // handle form submission logic
-    console.log({
-      userType,
-      fullName,
-      collegeName,
-      phoneNumber,
-      email,
-      termsAccepted,
-    });
+
+    // Client-side validation
+    if (!fullName || !collegeName || !phoneNumber || !email || !termsAccepted) {
+      setError("Please fill all fields and accept the terms.");
+      return;
+    }
+
+    // Validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      setError("Please enter a valid email address.");
+      return;
+    }
+
+    // Validate phone number format (example: 10 digits)
+    const phoneRegex = /^[0-9]{10}$/;
+    if (!phoneRegex.test(phoneNumber)) {
+      setError("Please enter a valid 10-digit phone number.");
+      return;
+    }
+
+    setError(""); // Clear previous errors
+    setLoading(true); // Start spinner
+
+    // Save data to Firestore
+    try {
+      await addDoc(collection(db, "Form_Contacts"), {
+        userType,
+        fullName,
+        collegeName,
+        phoneNumber,
+        email,
+        termsAccepted,
+      });
+
+      // Clear form fields after successful submission
+      setFullName("");
+      setCollegeName("");
+      setPhoneNumber("");
+      setEmail("");
+      setTermsAccepted(false);
+      setSuccess("We will contact you back soon. Thanks for joining.");
+    } catch (e) {
+      console.error("Error adding document: ", e);
+      setError(
+        "An error occurred while submitting the form. Please try again."
+      );
+    } finally {
+      setLoading(false); // Stop spinner
+    }
   };
 
   return (
@@ -50,8 +104,8 @@ const Form = () => {
                 value={userType}
                 onChange={(e) => setUserType(e.target.value)}
               >
-                <option value="College">College</option>
                 <option value="Student">Student</option>
+                <option value="College">College</option>
               </select>
             </div>
             <div className="flex flex-col group font-outfit">
@@ -83,7 +137,7 @@ const Form = () => {
                 id="collegeName"
                 className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
                 name="collegeName"
-                placeholder="Google"
+                placeholder="Sastra University"
                 required
                 maxLength={25}
                 value={collegeName}
@@ -120,7 +174,7 @@ const Form = () => {
                 id="email"
                 className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
                 name="email"
-                placeholder="20311A05M7@sreenidhi.edu.in"
+                placeholder="20311A05M7@college.edu.in"
                 type="email"
                 required
                 value={email}
@@ -143,16 +197,44 @@ const Form = () => {
                 className="ms-2 text-sm font-medium text-black"
               >
                 Agree to{" "}
-                <a href="/terms" className="text-blue-600 underline">
+                <a href="/form" className="text-blue-600 underline">
                   terms and conditions
                 </a>
               </label>
             </div>
+            {error && <div className="text-red-500 mb-4">{error}</div>}
+            {success && <div className="text-green-500 mb-4">{success}</div>}
             <button
               type="submit"
-              className="block cursor-pointer mx-auto text-white btn font-outfit w-[100%] p-3 px-6 rounded-md bg-[#00A3EA]"
+              disabled={loading}
+              className={`block cursor-pointer mx-auto text-white btn font-outfit w-[100%] p-3 px-6 rounded-md ${
+                loading ? "bg-gray-400" : "bg-[#00A3EA]"
+              } transition-colors`}
             >
-              Submit
+              {loading ? (
+                <svg
+                  className="w-5 h-5 mr-3 inline animate-spin"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <circle
+                    className="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    strokeWidth="4"
+                  />
+                  <path
+                    className="opacity-75"
+                    fill="currentColor"
+                    d="M4 12a8 8 0 0114.1-4.08L12 12l6.1 4.08A8 8 0 014 12z"
+                  />
+                </svg>
+              ) : (
+                "Submit"
+              )}
             </button>
           </div>
         </form>

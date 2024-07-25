@@ -30,33 +30,33 @@ const AboutUs = () => {
             <h1 className="text-[30px] md:text-[46px] md:leading-[60px] font-bold lg:w-[80%] mb-4 ">
               Mission
             </h1>
-            <div className="text-gray-500 space-y-2">
+            <ul className="text-gray-500 list-disc  space-y-2">
               {" "}
-              <p>
+              <li className="">
                 To impart quality training on the latest technologies through
                 domain experts.
-              </p>
-              <p>
+              </li>
+              <li>
                 {" "}
                 Mapping the individuals’ skillset to the industry requirements
                 through valued Mentorship.
-              </p>
-              <p>
+              </li>
+              <li>
                 {" "}
                 To experience the real time learning through internships in
                 collaboration with the industries and experts.
-              </p>
-              <p>
+              </li>
+              <li>
                 {" "}
                 To support job opportunities and assist for their professional
                 career development.
-              </p>
-              <p>
+              </li>
+              <li>
                 To guide and support aspiring graduates to global education
                 excellence by providing expert advice and thorough application
                 assistance.{" "}
-              </p>
-            </div>
+              </li>
+            </ul>
           </div>
 
           <img className="md:w-[50%] rounded-lg" src={Ab2}></img>

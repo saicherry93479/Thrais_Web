@@ -4,10 +4,9 @@ body {
   /* font-family: "Playwrite NG Modern", cursive;
    */
   /* font-family: "Josefin Sans", sans-serif; */
-  font-family: "Varela Round", sans-serif;
-
+  font-family: "Outfit", sans-serif;
 }
-*{
+* {
   scroll-behavior: smooth;
 }
 .heroGradient {
@@ -36,4 +35,24 @@ body {
 
 .no-scroll {
   overflow: hidden;
+}
+
+
+/* Add this to your global CSS file */
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.scroll-wrapper {
+  overflow: hidden;
+}
+
+.scroll-container {
+  display: flex;
+  animation: scroll 30s linear infinite;
 }
