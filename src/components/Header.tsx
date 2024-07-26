@@ -18,22 +18,27 @@ const Header = () => {
           {menuOpen && (
             <ul className="absolute font-bold left-0 flex-col w-full px-4 py-2 md:py-1 text-white transition-all md:hidden top-[10vh] md:w-auto md:rounded-full md:shadow-lg md:flex-row items-center md:static bg-[#00A3EA] md:!opacity-100 md:!pointer-events-auto md:!translate-y-0 open">
               <li className="svelte-dubwht">
-                <a className="block py-2 svelte-dubwht" href="/course">
+                <a href="/#overseas" className="block py-2 svelte-dubwht">
                   Overseas
                 </a>
               </li>{" "}
               <li className="svelte-dubwht">
-                <a className="block py-2 svelte-dubwht" href="/events">
-                  Courses
+                <a href="/services" className="block py-2 svelte-dubwht">
+                  Services
                 </a>
               </li>{" "}
               <li className="svelte-dubwht">
-                <a className="block py-2 svelte-dubwht" href="/#community">
-                  About Us
+                <a href="/events" className="block py-2 svelte-dubwht">
+                  Events
                 </a>
               </li>{" "}
               <li className="md:hidden svelte-dubwht">
-                <a className="block py-2 svelte-dubwht" href="/register">
+                <a href="/aboutus" className="block py-2 svelte-dubwht">
+                  About Us
+                </a>
+              </li>
+              <li className="md:hidden svelte-dubwht">
+                <a href="/form" className="block py-2 svelte-dubwht">
                   Join Now
                 </a>
               </li>
